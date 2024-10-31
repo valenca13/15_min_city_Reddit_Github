@@ -1,7 +1,7 @@
 README
 ================
 
-[btm_teste](Btm_bigram.Rmd)
+[btm_teste](Btm_bigram.md)
 
 ## GitHub Documents
 

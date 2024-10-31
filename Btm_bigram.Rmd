@@ -2,7 +2,7 @@
 title: "BTM_Bigram"
 author: "GV"
 date: "2024-10-31"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}

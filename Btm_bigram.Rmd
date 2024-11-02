@@ -37,17 +37,21 @@ data <- read_xlsx("Reddit_15mincity_Treated_Pass1.xlsx")
 ```
 
 ### Replace strange characters
-
+```{r}
 # data$comment <- str_replace_all(df$comment, "\031", "'")
 # data$comment <- str_replace_all(df$comment, "\034", " ")
 # data$comment <- str_replace_all(df$comment, "\035", " ")
 # data$comment <- str_replace_all(df$comment, "&gt", " ")
 # data$comment <- str_replace_all(df$comment, "\n[a-z,a-z]*", " ")
+```
 
+```{r}
 df <- data.frame(data) |>
   filter(Filter == 1) |>   #filter by the comments that were classified as relevant
   select(comment)
+```
 
+```{r}
 #Normalize the term 15 minute city
 df$comment <- str_replace_all(df$comment, "15 minute city", "15mincity")
 df$comment <- str_replace_all(df$comment, "15 minute city", "15mincity")
@@ -56,7 +60,9 @@ df$comment <- str_replace_all(df$comment, "15-minute city", "15mincity")
 df$comment <- str_replace_all(df$comment, "15-minute cities", "15mincity")
 df$comment <- str_replace_all(df$comment, "15 min city", "15mincity")
 df$comment <- str_replace_all(df$comment, "15 min cities", "15mincity")
+```
 
+```{r}
 #Remove punctuation
 text2 <- gsub(pattern = "\\W", replace = " ", df)
 #Take out urls
@@ -76,17 +82,20 @@ adicional_stopwords <- c("don", stopwords("en"))
 text_bigram <- removeWords(text7, adicional_stopwords)
 
 head(text_bigram)
+```
 
-#############################################################################
 
 #Bigrams
 
+```{r}
 library(quanteda)
 library(igraph)
 library(ggraph)
 library(tidyverse)
 library(tidyr)
 library(broom)
+```
+
 
 #Create dataframe
 df_corpus <- data.frame(text_bigram)

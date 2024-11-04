@@ -150,6 +150,6 @@ model$theta
 
 ```{r fig.height = 9, fig.width = 7}
 plot(model, top_n = 25, title ="",
-     labels = c("Freedom of movement (10.22 %)", "Urban transition (21.41 %)", "Choice and opportunity (38.29 %)", "Explanation (13.43 %)", "Apprehension and misinformation (16.65 %)"))
+     labels = c("Freedom of movement (x %)", "Urban transition (y %)", "Choice and opportunity (z %)", "Explanation (a %)", "Apprehension and misinformation (b %)"))
 ```
 

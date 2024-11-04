@@ -1,35 +1,34 @@
-README
+Bigrams and Biterm Topic Model (BTM)
 ================
 
-[btm_teste](Btm_bigram.md)
+## Content
 
-## GitHub Documents
+This page was created for providing the code, reproducing the results
+and presenting the step-by-step process of the results found in the
+paper:
 
-This is an R Markdown format used for publishing markdown documents to
-GitHub. When you click the **Knit** button all R code chunks are run and
-a markdown file (.md) suitable for publishing to GitHub is generated.
+> Valença, G.; Hook, H. *Why do some American fear “15-minute cities”?*.
+> Paper currently submitted for revision.
 
-## Including Code
+**1. Code**
 
-You can include R code in the document as follows:
+The code used for the developing the bigrams and Biterm Topic Models
+(BTM) can be found at: [code](TopicModelling_bigram.R)
 
-``` r
-summary(cars)
-```
+**2. Dataset**
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+The dataset used in this work is shared only by request. Since we used
+data from Reddit, there has concerns related to privacy risks.
+Nonetheless, researchers propose that sharing the dataset upon request
+is a respectable compromise, balancing the need for reproducibility with
+ethical considerations. Please contact the authors for the treated
+dataset with omitted id’s.
 
-## Including Plots
+**2. Reproducibility of the results**
 
-You can also embed plots, for example:
+The step-by-step process and the results are reproduced in this webpage.
+Please check below:
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->
+- [Bigrams](bigram.Rmd)
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+- [Biterm Topic Model](BTM.Rmd)

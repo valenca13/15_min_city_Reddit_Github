@@ -25,9 +25,9 @@ The dataset used in this work is shared only by request. Since we used data from
 
 The step-by-step process and the results are reproduced in this webpage. Please check below:
 
-* [Bigrams](bigram.Rmd)
+* [Bigrams](bigram.md)
 
-* [Biterm Topic Model](BTM.Rmd)
+* [Biterm Topic Model](BTM.md)
 
 
 

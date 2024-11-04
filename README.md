@@ -29,6 +29,6 @@ dataset with omitted id’s.
 The step-by-step process and the results are reproduced in this webpage.
 Please check below:
 
-- [Bigrams](bigram.Rmd)
+- [Bigrams](bigram.md)
 
-- [Biterm Topic Model](BTM.Rmd)
+- [Biterm Topic Model](BTM.md)

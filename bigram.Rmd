@@ -151,3 +151,4 @@ ggraph(bigram_network, layout = "fr") +
   theme_void()
 ```
 
+> **Note:** The results are the same of the paper. However the position of the bigrams are plotted different. 

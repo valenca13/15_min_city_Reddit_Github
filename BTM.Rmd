@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Biterm Topic Model (BTM)"
 output: github_document
 ---
 
@@ -54,7 +54,9 @@ df_tm <- df_tm |>
   relocate(doc_id, text)
 ```
 
-#### 2. Data preprocessing
+### 2. Data preprocessing
+
+#### Standard data cleaning
 
 ```{r}
 # Remove punctuation
@@ -69,7 +71,6 @@ df_tm$text <- gsub(pattern = "\\b[A-z]\\b{1}", replace = " ", df_tm$text)
 df_tm$text <- lemmatize_strings(df_tm$text, dictionary = lexicon::hash_lemmas)
 #Remove whitespace
 df_tm$text <- stripWhitespace(df_tm$text)
-
 ```
 
 #### remove stopwords
@@ -105,7 +106,9 @@ biterms <- biterms[, cooccurrence(x = lemma,
                    by = list(doc_id)]
 ```
 
-#### Build BTM
+### 3. Build BTM
+
+#### Train the model
 
 ```{r}
 set.seed(588)
@@ -131,7 +134,6 @@ topicterms <- data.frame(topicterms)
 #### plot topicterms
 
 ```{r}
-
 plot(model, top_n = 20, title ="",
      labels = paste(round(model$theta *
                             100, 2), "%", sep = ""))

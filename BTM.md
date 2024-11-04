@@ -1,4 +1,4 @@
-Untitled
+Biterm Topic Model (BTM)
 ================
 
 ### 1. Import libraries and dataset
@@ -48,7 +48,9 @@ df_tm <- df_tm |>
   relocate(doc_id, text)
 ```
 
-#### 2. Data preprocessing
+### 2. Data preprocessing
+
+#### Standard data cleaning
 
 ``` r
 # Remove punctuation
@@ -90,11 +92,11 @@ df_tm$text <- str_replace_all(df_tm$text, "15 min cities", "15mincity")
 biterm_data_tm <- udpipe(df_tm, "english", trace = 500)
 ```
 
-    ## 2024-11-04 15:05:52.681843 Annotating text fragment 1/2347
-    ## 2024-11-04 15:06:07.724377 Annotating text fragment 501/2347
-    ## 2024-11-04 15:06:18.837392 Annotating text fragment 1001/2347
-    ## 2024-11-04 15:06:32.018522 Annotating text fragment 1501/2347
-    ## 2024-11-04 15:06:43.974675 Annotating text fragment 2001/2347
+    ## 2024-11-04 15:34:39.302424 Annotating text fragment 1/2347
+    ## 2024-11-04 15:34:54.342653 Annotating text fragment 501/2347
+    ## 2024-11-04 15:35:05.378321 Annotating text fragment 1001/2347
+    ## 2024-11-04 15:35:18.497321 Annotating text fragment 1501/2347
+    ## 2024-11-04 15:35:30.372942 Annotating text fragment 2001/2347
 
 ``` r
 biterms <- as.data.table(biterm_data_tm)
@@ -107,7 +109,9 @@ biterms <- biterms[, cooccurrence(x = lemma,
                    by = list(doc_id)]
 ```
 
-#### Build BTM
+### 3. Build BTM
+
+#### Train the model
 
 ``` r
 set.seed(588)
@@ -121,16 +125,16 @@ model <- BTM(traindata, k = 5,
              trace = 100)
 ```
 
-    ## 2024-11-04 15:07:24 Start Gibbs sampling iteration 1/1000
-    ## 2024-11-04 15:07:27 Start Gibbs sampling iteration 101/1000
-    ## 2024-11-04 15:07:30 Start Gibbs sampling iteration 201/1000
-    ## 2024-11-04 15:07:33 Start Gibbs sampling iteration 301/1000
-    ## 2024-11-04 15:07:37 Start Gibbs sampling iteration 401/1000
-    ## 2024-11-04 15:07:40 Start Gibbs sampling iteration 501/1000
-    ## 2024-11-04 15:07:43 Start Gibbs sampling iteration 601/1000
-    ## 2024-11-04 15:07:46 Start Gibbs sampling iteration 701/1000
-    ## 2024-11-04 15:07:49 Start Gibbs sampling iteration 801/1000
-    ## 2024-11-04 15:07:53 Start Gibbs sampling iteration 901/1000
+    ## 2024-11-04 15:36:10 Start Gibbs sampling iteration 1/1000
+    ## 2024-11-04 15:36:13 Start Gibbs sampling iteration 101/1000
+    ## 2024-11-04 15:36:17 Start Gibbs sampling iteration 201/1000
+    ## 2024-11-04 15:36:20 Start Gibbs sampling iteration 301/1000
+    ## 2024-11-04 15:36:23 Start Gibbs sampling iteration 401/1000
+    ## 2024-11-04 15:36:26 Start Gibbs sampling iteration 501/1000
+    ## 2024-11-04 15:36:29 Start Gibbs sampling iteration 601/1000
+    ## 2024-11-04 15:36:32 Start Gibbs sampling iteration 701/1000
+    ## 2024-11-04 15:36:36 Start Gibbs sampling iteration 801/1000
+    ## 2024-11-04 15:36:39 Start Gibbs sampling iteration 901/1000
 
 #### Inspect the model - topic frequency + conditional term probabilities
 

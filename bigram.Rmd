@@ -135,6 +135,14 @@ bigram_counts <- bigrams_filtered %>%
 #### Plot the bigram graph network
 
 ```{r}
+plot(model, top_n = 20, title ="",
+     labels = paste(round(model$theta *
+                            100, 2), "%", sep = ""))
+```
+
+#### Put legend in bigram graph network
+
+```{r}
 bigram_network <- bigram_counts %>%
   filter(n > 11) %>% #filter for the most common combinations of bigrams that appear at least 15 times.
   graph_from_data_frame()

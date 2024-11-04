@@ -131,15 +131,19 @@ topicterms <- terms(model, top_n = 25)
 topicterms <- data.frame(topicterms)
 ```
 
-#### plot topicterms
+#### Plot topicterms
 
-```{r}
+```{r out.height="200%"}
 plot(model, top_n = 20, title ="",
      labels = paste(round(model$theta *
                             100, 2), "%", sep = ""))
 
-plot(model, top_n = 25, title ="",
-     labels = c("Freedom of movement (10.22 %)", "Urban transition (21.41 %)", "Choice and opportunity (38.29 %)", "Explanation (13.43 %)", "Apprehension and misinformation (16.65 %)"))
-
 model$theta
 ```
+
+#### Plot BTM with legend on topics
+```{r, fig.height="10in"}
+plot(model, top_n = 25, title ="",
+     labels = c("Freedom of movement (10.22 %)", "Urban transition (21.41 %)", "Choice and opportunity (38.29 %)", "Explanation (13.43 %)", "Apprehension and misinformation (16.65 %)"))
+```
+

@@ -92,11 +92,11 @@ df_tm$text <- str_replace_all(df_tm$text, "15 min cities", "15mincity")
 biterm_data_tm <- udpipe(df_tm, "english", trace = 500)
 ```
 
-    ## 2024-11-04 15:39:26.789528 Annotating text fragment 1/2347
-    ## 2024-11-04 15:39:42.314658 Annotating text fragment 501/2347
-    ## 2024-11-04 15:39:53.424657 Annotating text fragment 1001/2347
-    ## 2024-11-04 15:40:06.856009 Annotating text fragment 1501/2347
-    ## 2024-11-04 15:40:18.623544 Annotating text fragment 2001/2347
+    ## 2024-11-04 15:50:11.592336 Annotating text fragment 1/2347
+    ## 2024-11-04 15:50:26.77391 Annotating text fragment 501/2347
+    ## 2024-11-04 15:50:37.962437 Annotating text fragment 1001/2347
+    ## 2024-11-04 15:50:51.240571 Annotating text fragment 1501/2347
+    ## 2024-11-04 15:51:03.395242 Annotating text fragment 2001/2347
 
 ``` r
 biterms <- as.data.table(biterm_data_tm)
@@ -125,16 +125,16 @@ model <- BTM(traindata, k = 5,
              trace = 100)
 ```
 
-    ## 2024-11-04 15:40:58 Start Gibbs sampling iteration 1/1000
-    ## 2024-11-04 15:41:02 Start Gibbs sampling iteration 101/1000
-    ## 2024-11-04 15:41:06 Start Gibbs sampling iteration 201/1000
-    ## 2024-11-04 15:41:09 Start Gibbs sampling iteration 301/1000
-    ## 2024-11-04 15:41:13 Start Gibbs sampling iteration 401/1000
-    ## 2024-11-04 15:41:16 Start Gibbs sampling iteration 501/1000
-    ## 2024-11-04 15:41:20 Start Gibbs sampling iteration 601/1000
-    ## 2024-11-04 15:41:23 Start Gibbs sampling iteration 701/1000
-    ## 2024-11-04 15:41:26 Start Gibbs sampling iteration 801/1000
-    ## 2024-11-04 15:41:29 Start Gibbs sampling iteration 901/1000
+    ## 2024-11-04 15:51:43 Start Gibbs sampling iteration 1/1000
+    ## 2024-11-04 15:51:46 Start Gibbs sampling iteration 101/1000
+    ## 2024-11-04 15:51:49 Start Gibbs sampling iteration 201/1000
+    ## 2024-11-04 15:51:53 Start Gibbs sampling iteration 301/1000
+    ## 2024-11-04 15:51:56 Start Gibbs sampling iteration 401/1000
+    ## 2024-11-04 15:51:59 Start Gibbs sampling iteration 501/1000
+    ## 2024-11-04 15:52:02 Start Gibbs sampling iteration 601/1000
+    ## 2024-11-04 15:52:06 Start Gibbs sampling iteration 701/1000
+    ## 2024-11-04 15:52:10 Start Gibbs sampling iteration 801/1000
+    ## 2024-11-04 15:52:13 Start Gibbs sampling iteration 901/1000
 
 #### Inspect the model - topic frequency + conditional term probabilities
 
@@ -152,6 +152,7 @@ topicterms <- data.frame(topicterms)
 #### plot topicterms
 
 ``` r
+knitr::opts_chunk$set(fig.height = 9, fig.width = 7)
 plot(model, top_n = 20, title ="",
      labels = paste(round(model$theta *
                             100, 2), "%", sep = ""))

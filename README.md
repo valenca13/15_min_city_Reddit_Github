@@ -10,6 +10,22 @@ paper:
 > Valença, G.; Hook, H (2024). *Why do some American fear “15-minute
 > cities”?*. Paper currently submitted for revision.
 
+**Short abstract**
+
+*Using a textual social media dataset obtained from Reddit, this
+research analyses the public discussion on 16 and 17 February 2024
+surrounding the question, ‘Why do some Americans fear “15-minute
+cities”?’, with a mixed-methods approach. Topic modelling was used to
+categorize 2,346 eligible responses to the question into five main
+topics: Choice and opportunity (38.29%), urban transition (21.41%),
+apprehension and misinformation (16.65%), explanation (13.43%), and
+freedom of movement (10.22%). Bigrams and a qualitative thematic
+analysis were used to validate these topics, identifying nuanced public
+perceptions about the 15-minute city, including lifestyle preferences,
+socioeconomic factors, car-centric urban planning, practical challenges,
+government control conspiracies, cultural resistance, conceptualization,
+feasibility, polarization, and social concerns.*
+
 **1. Code**
 
 - Webscrapping the comments using Reddit’s API: [code](WebScrapping.R)
@@ -25,11 +41,23 @@ compromise, balancing the need for reproducibility with ethical
 considerations. Please contact the authors for the treated dataset with
 omitted id’s.
 
-**2. Reproducibility of the results**
+**3. Results**
 
-The step-by-step process and the results are reproduced in this webpage.
-Please check below:
+- The BTM was used to identify patterns in the text.
 
-- [Bigrams](bigram.md)
+<figure>
+<img src="Topics.png"
+alt="Figure 1: Biterm Topic Model of Reddit’s post" />
+<figcaption aria-hidden="true"><strong>Figure 1:</strong> Biterm Topic
+Model of Reddit’s post</figcaption>
+</figure>
 
-- [Biterm Topic Model](BTM.md)
+- The bigram network graph were used to identify the most common
+  sequence of word pairs, providing context to the topics.
+
+<figure>
+<img src="bigram.png"
+alt="Figure 2: Bigram Network Graph of Reddit’s post" />
+<figcaption aria-hidden="true"><strong>Figure 2:</strong> Bigram Network
+Graph of Reddit’s post</figcaption>
+</figure>

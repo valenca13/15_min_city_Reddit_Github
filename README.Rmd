@@ -31,13 +31,13 @@ The dataset used in this work is **shared only by request**. There are privacy r
 
 * The BTM was used to identify patterns in the text. 
 
-![**Figure 1:** Biterm Topic Model of Reddit's post](Topics.png)  
+![](Topics.png)  
   
   
 
 * The bigram network graph were used to identify the most common sequence of word pairs, providing context to the topics.  
 
-![**Figure 2:** Bigram Network Graph of Reddit's post](bigram.png)
+![](bigram.png)
 
 
 

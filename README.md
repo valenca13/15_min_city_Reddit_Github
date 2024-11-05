@@ -45,19 +45,9 @@ omitted id’s.
 
 - The BTM was used to identify patterns in the text.
 
-<figure>
-<img src="Topics.png"
-alt="Figure 1: Biterm Topic Model of Reddit’s post" />
-<figcaption aria-hidden="true"><strong>Figure 1:</strong> Biterm Topic
-Model of Reddit’s post</figcaption>
-</figure>
+![](Topics.png)
 
 - The bigram network graph were used to identify the most common
   sequence of word pairs, providing context to the topics.
 
-<figure>
-<img src="bigram.png"
-alt="Figure 2: Bigram Network Graph of Reddit’s post" />
-<figcaption aria-hidden="true"><strong>Figure 2:</strong> Bigram Network
-Graph of Reddit’s post</figcaption>
-</figure>
+![](bigram.png)

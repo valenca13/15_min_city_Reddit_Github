@@ -282,7 +282,7 @@ compute_npmi_for_model <- function(model, top_n = 10) {
   mean(npmi_scores, na.rm = TRUE)  # return average coherence
 }
 
-k_values <- c(3, 4, 5, 6, 7, 8, 10, 15)
+k_values <- c(3, 4, 5, 6, 7, 8)
 
 models <- lapply(k_values, function(k) {
   BTM(traindata,

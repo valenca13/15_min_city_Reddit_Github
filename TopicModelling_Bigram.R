@@ -191,10 +191,6 @@ model <- BTM(traindata, k = 5,
 ## Inspect the model - topic frequency + conditional term probabilities
 model$theta
 
-topicterms <- terms(model, top_n = 25)
-topicterms <- data.frame(topicterms)
-
-
 #plot topicterms
 
 library(textplot)
@@ -204,8 +200,116 @@ plot(model, top_n = 20, title ="",
      labels = paste(round(model$theta *
                             100, 2), "%", sep = ""))
 
-plot(model, top_n = 25, title ="",
+# Plot and change the labels according to the order of the topics. 
+plot(model, top_n = 20, title ="",
      labels = c("Freedom of movement (10.22 %)", "Urban transition (21.41 %)", "Choice and opportunity (38.29 %)", "Explanation (13.43 %)", "Apprehension and misinformation (16.65 %)"))
 
 model$theta
 
+#Quality of topics
+
+# Count co-occurrences
+biterm_counts <- biterms[, .N, by = .(term1, term2)]
+
+# Total number of biterms
+total_biterms <- sum(biterm_counts$N)
+
+# Count how often each word appears in any biterm
+word_counts <- rbind(
+  biterm_counts[, .(term = term1, N)],
+  biterm_counts[, .(term = term2, N)]
+)[, .(N = sum(N)), by = term]
+
+#  NPMI function
+npmi_pair <- function(w1, w2, biterm_counts, word_counts, total_biterms, eps = 1e-12) {
+
+  pair <- biterm_counts[
+    (term1 == w1 & term2 == w2) |
+      (term1 == w2 & term2 == w1)
+  ]
+
+  cooc <- ifelse(nrow(pair) == 0, 0, pair$N)
+
+  w1_count <- word_counts[term == w1, N]
+  w2_count <- word_counts[term == w2, N]
+
+  if (length(w1_count) == 0 || length(w2_count) == 0) return(NA)
+
+  # probabilities based on biterms
+  p_w1 <- w1_count / total_biterms
+  p_w2 <- w2_count / total_biterms
+  p_w1w2 <- cooc / total_biterms
+
+  if (p_w1w2 == 0) return(NA)
+
+  pmi <- log(p_w1w2 / (p_w1 * p_w2) + eps)
+  npmi <- pmi / (-log(p_w1w2 + eps))
+
+  return(npmi)
+}
+
+# Extract Top 10 words in topics
+
+top_terms <- terms(model, top_n = 20)
+str(top_terms)
+
+#Compute NPMI for each topic
+
+npmi_scores <- sapply(top_terms, function(topic_df) {
+  words <- topic_df$token
+  
+  npmi_topic(words,
+             biterm_counts = biterm_counts,
+             word_counts = word_counts,
+             total_biterms = total_biterms)
+})
+npmi_scores
+
+#Check with various topics k
+
+compute_npmi_for_model <- function(model, top_n = 10) {
+  top_terms <- terms(model, top_n = top_n)
+  
+  # top_terms is a list of data frames
+  npmi_scores <- sapply(top_terms, function(topic_df) {
+    words <- topic_df$token
+    npmi_topic(words,
+               biterm_counts = biterm_counts,
+               word_counts = word_counts,
+               total_biterms = total_biterms)
+  })
+  
+  mean(npmi_scores, na.rm = TRUE)  # return average coherence
+}
+
+k_values <- c(3, 4, 5, 6, 7, 8, 10, 15)
+
+models <- lapply(k_values, function(k) {
+  BTM(traindata,
+      k = k,
+      beta = 0.01,
+      iter = 3000,
+      window = 25,
+      biterms = biterms)
+})
+
+coherence_scores <- sapply(models, compute_npmi_for_model)
+coherence_scores
+
+library(ggplot2)
+
+df_k <- data.frame(
+  k = k_values,
+  npmi = coherence_scores
+)
+
+ggplot(df_k, aes(x = k, y = npmi)) +
+  geom_line(size = 1.2, color = "#0072B2") +
+  geom_point(size = 3, color = "#D55E00") +
+  geom_text(aes(label = round(npmi, 3)), vjust = -0.7, size = 4) +
+  labs(
+    title = "BTM Topic Coherence (NPMI) Across Different k",
+    x = "Number of Topics (k)",
+    y = "Average NPMI Coherence"
+  ) +
+  theme_minimal(base_size = 14)
